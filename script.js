@@ -1,14 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const currentDate = new Date();
-    const currentDayOfWeek = daysOfWeek[currentDate.getUTCDay()]; // Get the current day index (0-6)
+const currentDayText = document.querySelector("#currentDayOfTheWeek");
+const currentUTCTime = document.getElementById("currentUTCTime");
+const date = new Date();
 
-    const dayElement = document.getElementById('currentDayOfTheWeek');
-    dayElement.textContent = ` ${currentDayOfWeek}`;
+const generateCurrentDate = () => {
+  const daysOfTheWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const dayIndex = date.getDay();
+  const currentDay = daysOfTheWeek[dayIndex];
+  currentDayText.innerText = currentDay;
+};
 
+const generateUTCTime = () => {
+  const date = new Date();
+  const utcTimeMilliseconds = date.getTime();
+  currentUTCTime.textContent = utcTimeMilliseconds;
+};
 
-    const currentUTCTime = Date.now(); // Get current UTC time in milliseconds
-
-    const utcElement = document.getElementById('currentUTCTime');
-    utcElement.textContent = ` ${currentUTCTime} milliseconds`;
-});
+generateCurrentDate();
+generateUTCTime();
+setInterval(generateUTCTime, 1000);
